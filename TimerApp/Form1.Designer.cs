@@ -30,16 +30,16 @@
         {
             components = new System.ComponentModel.Container();
             panel1 = new Panel();
-            comboBox1 = new ComboBox();
             textBox1 = new TextBox();
-            button2 = new Button();
-            button1 = new Button();
+            button_Stop = new Button();
+            button_Start = new Button();
+            comboBox1 = new ComboBox();
             timer1 = new System.Windows.Forms.Timer(components);
             panel2 = new Panel();
+            textBox3 = new TextBox();
+            textBox2 = new TextBox();
             comboBox2 = new ComboBox();
             dataGridView1 = new DataGridView();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -48,14 +48,40 @@
             // panel1
             // 
             panel1.BackColor = Color.MediumTurquoise;
-            panel1.BorderStyle = BorderStyle.Fixed3D;
             panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(button_Stop);
+            panel1.Controls.Add(button_Start);
             panel1.Location = new Point(12, 24);
             panel1.Name = "panel1";
             panel1.Size = new Size(380, 395);
             panel1.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(68, 145);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(147, 23);
+            textBox1.TabIndex = 2;
+            // 
+            // button_Stop
+            // 
+            button_Stop.Location = new Point(177, 98);
+            button_Stop.Name = "button_Stop";
+            button_Stop.Size = new Size(75, 23);
+            button_Stop.TabIndex = 1;
+            button_Stop.Text = "Stop";
+            button_Stop.UseVisualStyleBackColor = true;
+            button_Stop.Click += button_Stop_Click;
+            // 
+            // button_Start
+            // 
+            button_Start.Location = new Point(37, 98);
+            button_Start.Name = "button_Start";
+            button_Start.Size = new Size(75, 23);
+            button_Start.TabIndex = 0;
+            button_Start.Text = "Start";
+            button_Start.UseVisualStyleBackColor = true;
+            button_Start.Click += button_Start_Click;
             // 
             // comboBox1
             // 
@@ -65,34 +91,6 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(121, 23);
             comboBox1.TabIndex = 3;
-            
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(62, 246);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(147, 23);
-            textBox1.TabIndex = 2;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(73, 144);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 1;
-            button2.Text = "Stop";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(73, 59);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Start";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // timer1
             // 
@@ -110,22 +108,16 @@
             panel2.Size = new Size(390, 148);
             panel2.TabIndex = 4;
             // 
-            // comboBox2
+            // textBox3
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "study", "work", "relaxation", "other" });
-            comboBox2.Location = new Point(23, 75);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(226, 23);
-            comboBox2.TabIndex = 0;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(398, 195);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(390, 224);
-            dataGridView1.TabIndex = 5;
+            textBox3.Location = new Point(255, 19);
+            textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
+            textBox3.Size = new Size(121, 23);
+            textBox3.TabIndex = 4;
+            textBox3.TabStop = false;
+            textBox3.Text = "Time";
+            textBox3.TextAlign = HorizontalAlignment.Center;
             // 
             // textBox2
             // 
@@ -137,16 +129,23 @@
             textBox2.Text = " Type of work";
             textBox2.TextAlign = HorizontalAlignment.Center;
             // 
-            // textBox3
+            // comboBox2
             // 
-            textBox3.Location = new Point(255, 19);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(121, 23);
-            textBox3.TabIndex = 4;
-            textBox3.TabStop = false;
-            textBox3.Text = "Time";
-            textBox3.TextAlign = HorizontalAlignment.Center;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "study", "work", "relaxation", "other" });
+            comboBox2.Location = new Point(23, 75);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(226, 23);
+            comboBox2.TabIndex = 0;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(398, 195);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new Size(390, 224);
+            dataGridView1.TabIndex = 5;
             // 
             // Form1
             // 
@@ -172,8 +171,8 @@
 
         private Panel panel1;
         private TextBox textBox1;
-        private Button button2;
-        private Button button1;
+        private Button button_Stop;
+        private Button button_Start;
         private System.Windows.Forms.Timer timer1;
         private ComboBox comboBox1;
         private Panel panel2;
